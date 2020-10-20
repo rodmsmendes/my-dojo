@@ -28,6 +28,7 @@
 package my.dojo.controller;
 
 import my.dojo.model.Student;
+import my.dojo.model.StudentPage;
 import my.dojo.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -50,8 +51,11 @@ public class StudentController {
     }
 
     @GetMapping
-    public Iterable<Student> findAll() {
-        return studentService.findAll();
+    public StudentPage findAllByNameStartsWith(
+            @RequestParam(name="name", defaultValue = "") String name,
+            @RequestParam(name="page", defaultValue = "0") int page,
+            @RequestParam(name="size", defaultValue = "10") int size) {
+        return studentService.findAllByNameStartsWith(name, page, size);
     }
 
     @PutMapping("/{id}")

@@ -25,15 +25,55 @@
  * For more information, please refer to <https://unlicense.org>
  */
 
-package my.dojo.repository;
+package my.dojo.model;
 
-import my.dojo.model.Student;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Slice;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import java.util.List;
 
-@Repository
-public interface StudentRepository extends JpaRepository<Student, Long> {
-    Slice<Student> findAllByNameStartsWith(String name, Pageable pageable);
+public class StudentPage {
+    private List<Student> data;
+    private int page;
+    private int size;
+    private boolean next;
+
+    public StudentPage() {
+    }
+
+    public StudentPage(List<Student> data, int page, int size, boolean next) {
+        this.data = data;
+        this.page = page;
+        this.size = size;
+        this.next = next;
+    }
+
+    public List<Student> getData() {
+        return data;
+    }
+
+    public void setData(List<Student> data) {
+        this.data = data;
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    public boolean isNext() {
+        return next;
+    }
+
+    public void setNext(boolean next) {
+        this.next = next;
+    }
 }

@@ -28,8 +28,12 @@
 package my.dojo.service;
 
 import my.dojo.model.Student;
+import my.dojo.model.StudentPage;
 import my.dojo.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Slice;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -47,8 +51,10 @@ public class StudentService {
         return studentRepository.findById(id).get();
     }
 
-    public Iterable<Student> findAll() {
-        return studentRepository.findAll();
+    public StudentPage findAllByNameStartsWith(String name, int page, int size) {
+        PageRequest pageable = PageRequest.of(page, size, Sort.by("name").ascending());
+        Slice<Student> slice = studentRepository.findAllByNameStartsWith(name, pageable);
+        return new StudentPage(slice.getContent(), slice.getNumber(), slice.getSize(), slice.hasNext());
     }
 
     public Student update(Long id, Student updatedStudent) {
