@@ -34,6 +34,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/students")
 public class StudentController {
@@ -41,7 +43,7 @@ public class StudentController {
     private StudentService studentService;
 
     @PostMapping
-    public Student create(@RequestBody Student student) {
+    public Student create(@Valid @RequestBody Student student) {
         return studentService.create(student);
     }
 
@@ -59,7 +61,7 @@ public class StudentController {
     }
 
     @PutMapping("/{id}")
-    public Student update(@PathVariable("id") Long id, @RequestBody Student student) {
+    public Student update(@PathVariable("id") Long id, @Valid @RequestBody Student student) {
         return studentService.update(id, student);
     }
 

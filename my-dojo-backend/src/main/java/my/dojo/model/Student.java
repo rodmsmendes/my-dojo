@@ -30,6 +30,7 @@ package my.dojo.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 
 @Entity
@@ -40,31 +41,47 @@ public class Student {
     @Column(name = "ID")
     private Long id;
 
+    @NotEmpty
+    @Size(min = 1, max = 256)
     @Column(name = "NAME")
     private String name;
 
+    @NotNull
+    @Past
     @Column(name = "DATE_OF_BIRTH")
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfBirth;
 
+    @NotEmpty
+    @Digits(integer = 32, fraction = 0)
     @Column(name = "PHONE_NUMBER")
     private String phoneNumber;
 
+    @NotEmpty
+    @Email
     @Column(name = "EMAIL")
     private String email;
 
+    @NotNull
+    @Min(1)
+    @Max(10)
     @Column(name = "GRADE_RANK")
     private Integer gradeRank;
 
+    @NotNull
     @Column(name = "GRADE_TYPE")
-    private String gradeType;
+    @Enumerated(EnumType.STRING)
+    private GradeType gradeType;
 
+    @Size(max = 256)
     @Column(name = "GUARDIAN_NAME")
     private String guardianName;
 
+    @Digits(integer = 32, fraction = 0)
     @Column(name = "GUARDIAN_PHONE")
     private String guardianPhone;
 
+    @Email
     @Column(name = "GUARDIAN_EMAIL")
     private String guardianEmail;
 
@@ -116,11 +133,11 @@ public class Student {
         this.gradeRank = gradeRank;
     }
 
-    public String getGradeType() {
+    public GradeType getGradeType() {
         return gradeType;
     }
 
-    public void setGradeType(String gradeType) {
+    public void setGradeType(GradeType gradeType) {
         this.gradeType = gradeType;
     }
 
