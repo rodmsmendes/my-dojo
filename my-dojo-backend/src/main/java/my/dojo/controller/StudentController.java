@@ -27,6 +27,8 @@
 
 package my.dojo.controller;
 
+import my.dojo.exception.BusinessException;
+import my.dojo.exception.StudentNotFoundException;
 import my.dojo.model.Student;
 import my.dojo.model.StudentPage;
 import my.dojo.service.StudentService;
@@ -43,12 +45,12 @@ public class StudentController {
     private StudentService studentService;
 
     @PostMapping
-    public Student create(@Valid @RequestBody Student student) {
+    public Student create(@Valid @RequestBody Student student) throws BusinessException {
         return studentService.create(student);
     }
 
     @GetMapping("/{id}")
-    public Student findById(@PathVariable("id") Long id) {
+    public Student findById(@PathVariable("id") Long id) throws StudentNotFoundException {
         return studentService.findById(id);
     }
 
@@ -61,13 +63,13 @@ public class StudentController {
     }
 
     @PutMapping("/{id}")
-    public Student update(@PathVariable("id") Long id, @Valid @RequestBody Student student) {
+    public Student update(@PathVariable("id") Long id, @Valid @RequestBody Student student) throws StudentNotFoundException {
         return studentService.update(id, student);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteById(@PathVariable("id") Long id) {
+    public void deleteById(@PathVariable("id") Long id) throws StudentNotFoundException {
         studentService.deleteById(id);
     }
 }

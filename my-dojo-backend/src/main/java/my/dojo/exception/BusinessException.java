@@ -25,16 +25,17 @@
  * For more information, please refer to <https://unlicense.org>
  */
 
-package my.dojo.repository;
+package my.dojo.exception;
 
-import my.dojo.model.Student;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Slice;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
-@Repository
-public interface StudentRepository extends JpaRepository<Student, Long> {
-    Slice<Student> findAllByNameStartsWith(String name, Pageable pageable);
-    Boolean existsByEmail(String email);
+@ResponseStatus(code = HttpStatus.BAD_REQUEST)
+public class BusinessException extends Exception {
+    public BusinessException() {
+    }
+
+    public BusinessException(String message) {
+        super(message);
+    }
 }
