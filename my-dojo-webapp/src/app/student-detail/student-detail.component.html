@@ -1,0 +1,85 @@
+<h1 class="title">
+    Register New Student
+</h1>
+<form>
+    <div class="field">
+    <label class="label">Name</label>
+    <div class="control">
+        <input [(ngModel)]="student.name" class="input" type="text" name="name">
+    </div>
+    </div>
+    <div class="field">
+    <label class="label">Date of Birth</label>
+    <div class="control">
+        <div class="select mr-2">
+        <select [ngModel]="student.dateOfBirth.getDate()" (ngModelChange)="onChangeDay($event)" name="day">
+            <option *ngFor="let d of days" [ngValue]="d" [ngSelected]="">{{d}}</option>
+        </select>
+        </div>
+        <div class="select mr-2">
+        <select [ngModel]="student.dateOfBirth.getMonth() + 1" (ngModelChange)="onChangeMonth($event)" name="month">
+            <option *ngFor="let m of months" [ngValue]="m.value">{{m.label}}</option>
+        </select>
+        </div>
+        <div class="select mr">
+        <select [ngModel]="student.dateOfBirth.getFullYear()" (ngModelChange)="onChangeYear($event)" name="year">
+            <option *ngFor="let y of years" [ngValue]="y">{{y}}</option>
+        </select>
+        </div>
+    </div>
+    </div>
+    <div class="field">
+        <label class="label">Phone Number</label>
+        <div class="control">
+            <input [(ngModel)]="student.phoneNumber" class="input" type="tel" name="phoneNumber">
+        </div>
+    </div>
+    <div class="field">
+        <label class="label">Email</label>
+        <div class="control">
+            <input [(ngModel)]="student.email" class="input" type="email" name="email">
+        </div>
+    </div>
+    <div class="field">
+        <label class="label">Grade</label>
+        <div class="control">
+            <div class="select mr-2">
+            <select [(ngModel)]="student.gradeType" name="gradeType">
+                <option *ngFor="let t of gradeTypes" [ngValue]="t.value">{{t.label}}</option>
+            </select>
+            </div>
+            <div class="select">
+            <select [(ngModel)]="student.gradeRank" name="gradeRank">
+                <option *ngFor="let r of gradeRanks" [ngValue]="r">{{r}}</option>
+            </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="field">
+    <label class="label">Guardian's name</label>
+    <div class="control">
+        <input [(ngModel)]="student.guardianName" class="input" type="text" name="guardianName">
+    </div>
+    </div>
+    <div class="field">
+    <label class="label">Guardian's Phone</label>
+    <div class="control">
+        <input [(ngModel)]="student.guardianPhone" class="input" type="tel" name="guardianPhone">
+    </div>
+    </div>
+    <div class="field">
+    <label class="label">Guardian's Email</label>
+    <div class="control">
+        <input [(ngModel)]="student.guardianEmail" class="input" type="email" name=guardianEmail>
+    </div>
+    </div>
+    <div class="field is-grouped">
+    <div class="control">
+        <button class="button is-link" (click)="onClick($event)">Submit</button>
+    </div>
+    <div class="control">
+        <button class="button is-link is-light">Cancel</button>
+    </div>
+    </div>
+</form>
