@@ -53,7 +53,6 @@ public class Student {
     private LocalDate dateOfBirth;
 
     @NotEmpty
-    @Digits(integer = 32, fraction = 0)
     @Column(name = "PHONE_NUMBER")
     private String phoneNumber;
 
@@ -77,7 +76,6 @@ public class Student {
     @Column(name = "GUARDIAN_NAME")
     private String guardianName;
 
-    @Digits(integer = 32, fraction = 0)
     @Column(name = "GUARDIAN_PHONE")
     private String guardianPhone;
 

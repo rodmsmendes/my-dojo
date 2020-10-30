@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Student } from '../models/student';
+import { StudentService } from '../services/student.service';
 
 @Component({
   selector: 'app-student-detail',
@@ -49,7 +50,7 @@ export class StudentDetailComponent implements OnInit {
 
   selectedDay = 23
 
-  constructor() {
+  constructor(private studentService: StudentService) {
     for(var i = 1; i <= 10; i++) {
       this.gradeRanks.push(i)
     }
@@ -86,6 +87,8 @@ export class StudentDetailComponent implements OnInit {
   }
 
   onClick(event:any): void {
-    console.log(this.student)
+    this.studentService
+      .add(this.student)
+      .subscribe(response => console.log(response))
   }
 }
